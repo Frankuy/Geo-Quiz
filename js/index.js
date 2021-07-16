@@ -79,7 +79,7 @@ function drawScore() {
 
     scoreContainer
         .append('circle')
-        .attr('r', width / 24)
+        .attr('r', 40)
         .attr('fill', 'green')
         .attr('stroke', 'white')
         .attr('stroke-width', 2)
@@ -93,7 +93,7 @@ function drawScore() {
         .attr('dominant-baseline', 'middle')
         .attr('dy', 2)
         .attr('fill', 'white')
-        .attr('font-size', width / 800 * 32 - 2 * score.toString().length)
+        .attr('font-size', 32 - 2 * score.toString().length)
         .text(d => d);
 }
 
