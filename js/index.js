@@ -2,31 +2,45 @@
 var gameContainer = d3.select('#game-svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
 
+function newGame() {
+    score = 0;
+    time = 60000;
+    countdown = 4;
+    randomNumber = Math.floor(Math.random() * mapData.features.length);
+
+    d3.select('#user-input').property('disabled', false);
+    d3.select('#start-game').style('display', 'flex');
+    d3.select('#end-game').style('display', 'none');
+    d3.select('#new-game').on('click', function() { newGame(); })
+    
+    var timer = setInterval(() => {
+        if (countdown == 4) {
+            startgame.play();
+        }
+        if (countdown <= 4 && countdown > 0) {
+            d3.select('#countdown').text(countdown);
+        }
+        else {
+            clearInterval(timer);
+            d3.select('#countdown').text('');
+            d3.select('#start-game').style('display', 'none');
+        }
+        countdown -= 1;
+    }, 1000);
+
+    setTimeout(() => {
+        drawMap();
+        drawInput();
+        drawScore();
+        drawTimeRemaining();
+    }, 5000)
+}
+
 function getData() {
     d3.json("/asset/world.geojson")
     .then(function (data) {
         mapData = data;
-        randomNumber = Math.floor(Math.random() * mapData.features.length);
-        
-        setInterval(() => {
-            if (countdown == 4) {
-                startgame.play();
-            }
-            if (countdown <= 4 && countdown > 0) {
-                d3.select('#countdown').text(countdown);
-            }
-            else {
-                d3.select('#start-game').style('display', 'none');
-            }
-            countdown -= 1;
-        }, 1000);
-
-        setTimeout(() => {
-            drawMap();
-            drawInput();
-            drawScore();
-            drawTimeRemaining();
-        }, 5000)
+        newGame();
     });
 }
 
@@ -144,10 +158,11 @@ function drawTimeRemaining() {
         .attr('height', heightTime)
         .attr('fill', 'blue')
         .transition()
-        .duration(maxTime)
+        .duration(time)
         .ease(d3.easeLinear)
         .on('start', function () {
             ticktock.loop();
+            ticktock.speedup(1);
             timerFunction = setInterval(() => {
                 time -= 1000;
             }, 1000)

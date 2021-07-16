@@ -15,6 +15,7 @@ function sound(src) {
     }
     this.stop = function() {
         this.sound.pause();
+        this.sound.currentTime = 0;
     }
     this.loop = function() {
         this.sound.play();

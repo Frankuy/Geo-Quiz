@@ -40,6 +40,7 @@ html, body {
     display: none;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #start-game {
@@ -49,4 +50,10 @@ html, body {
 #end-game > span, #start-game > span {
     font-size: 100px;
     color: white;
+}
+
+#end-game > button {
+    font-size: 24px;
+    padding: 12px;
+    cursor: pointer;
 }
