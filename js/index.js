@@ -70,6 +70,7 @@ function drawInput() {
     userInput.addEventListener('keyup', function(event) {
         if (event.key == 'Enter') {
             if (userInput.value.toLowerCase() == mapData.features[randomNumber].properties.name.toLowerCase()) {
+                correct.play();
                 userInput.animate([
                     {border: '2px solid green' },
                     {border: '2px solid black' }
@@ -77,11 +78,13 @@ function drawInput() {
                 {
                     duration: 2000
                 })
+                userInput.value = '';
                 score += 1;
                 drawScore();
                 changeCountry();
             }
             else {
+                incorrect.play();
                 userInput.animate([
                     {border: '2px solid red' },
                     {border: '2px solid black' }
