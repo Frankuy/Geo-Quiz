@@ -15,8 +15,15 @@ function getData() {
 }
 
 function drawMap() {
+    var area = d3.geoPath().area(mapData.features[randomNumber])
+
+    var scaleLog = d3.scaleLog().domain(
+        d3.extent(mapData.features, feature => d3.geoPath().area(feature))
+    ).range([1080, 50])
+
     var projection = d3.geoMercator()
-        .scale(1080)
+        // .scale(1080)
+        .scale(scaleLog(area))
         .center(d3.geoCentroid(mapData.features[randomNumber]))
         .translate([width / 2, height / 2]);
     
