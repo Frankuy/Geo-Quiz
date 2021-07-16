@@ -7,10 +7,14 @@ function getData() {
     .then(function (data) {
         mapData = data;
         randomNumber = Math.floor(Math.random() * mapData.features.length);
-        drawMap();
-        drawInput();
-        drawScore();
-        drawTimeRemaining();
+        startgame.play();
+
+        setTimeout(() => {
+            drawMap();
+            drawInput();
+            drawScore();
+            drawTimeRemaining();
+        }, 4000)
     });
 }
 
@@ -128,17 +132,20 @@ function drawTimeRemaining() {
         .duration(maxTime)
         .ease(d3.easeLinear)
         .on('start', function () {
+            ticktock.loop();
             timerFunction = setInterval(() => {
                 time -= 1000;
             }, 1000)
         })
         .on('end', function () {
+            ticktock.stop();
             clearInterval(timerFunction);
         })
         .attr('width', 0)
         .attrTween("fill", function() {
             return function(t) {
                 if (t >= 1 - 10000/maxTime)  {
+                    ticktock.speedup(1.25);
                     return `rgb(${t * 255},0,${(1 - t) * 255})`
                 }
                 else {
