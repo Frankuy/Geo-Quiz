@@ -1,6 +1,6 @@
 var ticktock = new sound("/asset/sfx/mixkit-tick-tock-clock-timer-1048.wav");
 var startgame = new sound('/asset/sfx/mixkit-simple-game-countdown-921.wav');
-var correct = new sound('/asset/sfx/351564__bertrof__game-sound-correct-with-delay');
+var correct = new sound('/asset/sfx/351564__bertrof__game-sound-correct-with-delay.wav');
 var incorrect = new sound('/asset/sfx/351563__bertrof__game-sound-incorrect-with-delay.wav');
 
 function sound(src) {

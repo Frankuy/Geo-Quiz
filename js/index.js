@@ -154,6 +154,8 @@ function drawTimeRemaining() {
         })
         .on('end', function () {
             ticktock.stop();
+            d3.select('#end-game').style('display', 'flex');
+            d3.select('#user-input').property('disabled', true);
             clearInterval(timerFunction);
         })
         .attr('width', 0)
