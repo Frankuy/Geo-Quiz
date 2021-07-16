@@ -80,7 +80,7 @@ function drawInput() {
 }
 
 function drawScore() {
-    var scoreContainer = gameContainer.select('#score').attr('transform', `translate(60, ${height / 6})`);
+    var scoreContainer = gameContainer.select('#score').attr('transform', `translate(60, ${height / 8 <= 80 ? 80 : height / 8 })`);
 
     scoreContainer.selectAll('*').remove();
 
