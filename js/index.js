@@ -7,14 +7,26 @@ function getData() {
     .then(function (data) {
         mapData = data;
         randomNumber = Math.floor(Math.random() * mapData.features.length);
-        startgame.play();
+        
+        setInterval(() => {
+            if (countdown == 4) {
+                startgame.play();
+            }
+            if (countdown <= 4 && countdown > 0) {
+                d3.select('#countdown').text(countdown);
+            }
+            else {
+                d3.select('#start-game').style('display', 'none');
+            }
+            countdown -= 1;
+        }, 1000);
 
         setTimeout(() => {
             drawMap();
             drawInput();
             drawScore();
             drawTimeRemaining();
-        }, 4000)
+        }, 5000)
     });
 }
 
@@ -50,9 +62,9 @@ function drawInput() {
     var heightOffset = height / 4;
 
     d3.select('#user-input')
+        .style('display', 'block')
         .style('top', (height - heightOffset) + 'px')
         .style('left', (width / 2 - widthInput / 2) + 'px')
-        .style('opacity', 1)
 
     var userInput = document.getElementById('user-input');
     userInput.addEventListener('keyup', function(event) {

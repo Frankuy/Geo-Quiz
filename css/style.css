@@ -20,6 +20,7 @@ html, body {
     font-size: 14px;
     border-radius: 12px;
     border: 2px solid black;
+    display: none;
     z-index: 1;
     width: 160px;
 }
@@ -28,7 +29,7 @@ html, body {
     outline: none;
 }
 
-#end-game {
+#end-game, #start-game {
     position: fixed;
     top: 0;
     left: 0;
@@ -41,7 +42,11 @@ html, body {
     align-items: center;
 }
 
-#end-game > span {
+#start-game {
+    display: flex;
+}
+
+#end-game > span, #start-game > span {
     font-size: 100px;
     color: white;
 }
