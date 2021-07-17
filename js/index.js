@@ -3,16 +3,24 @@ var gameContainer = d3.select('#game-svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
 
 function newGame() {
+    // Init variable
     score = 0;
     time = 60000;
     countdown = 4;
     randomNumber = Math.floor(Math.random() * mapData.features.length);
+    wrongAnswer = 0;
 
+    // Layout setting
+    drawPassButton(false);
     d3.select('#user-input').property('disabled', false);
     d3.select('#start-game').style('display', 'flex');
     d3.select('#end-game').style('display', 'none');
+
+    // Button event listener
     d3.select('#new-game').on('click', function() { newGame(); })
+    d3.select('#pass-button').on('click', function() { pass(); })
     
+    // Show start countdown event
     var timer = setInterval(() => {
         if (countdown == 4) {
             startgame.play();
@@ -28,6 +36,7 @@ function newGame() {
         countdown -= 1;
     }, 1000);
 
+    // Draw game
     setTimeout(() => {
         drawMap();
         drawInput();
@@ -39,6 +48,7 @@ function newGame() {
 function getData() {
     d3.json("/asset/world.geojson")
     .then(function (data) {
+        // Get map then game played
         mapData = data;
         newGame();
     });
@@ -75,10 +85,14 @@ function drawInput() {
     var widthInput = 160;
     var heightOffset = height / 4;
 
+    d3.select('#pass-button')
+        .style('top', (height - heightOffset) + 'px')
+        .style('left', (width / 2 + widthInput / 2 + 24) + 'px')
+
     d3.select('#user-input')
         .style('display', 'block')
         .style('top', (height - heightOffset) + 'px')
-        .style('left', (width / 2 - widthInput / 2) + 'px')
+        .style('left', (width / 2 - widthInput / 2 - 8) + 'px')
 
     var userInput = document.getElementById('user-input');
     userInput.addEventListener('keyup', function(event) {
@@ -106,6 +120,11 @@ function drawInput() {
                 {
                     duration: 2000
                 })
+                userInput.value = '';
+                wrongAnswer += 1;
+                if (wrongAnswer == 3) {
+                    drawPassButton(true);
+                }
             }
         }
     })
@@ -187,10 +206,27 @@ function drawTimeRemaining() {
           });
 }
 
+function drawPassButton(show) {
+    if (show) {
+        d3.select('#pass-button').style('display', 'block');
+    }
+    else {
+        d3.select('#pass-button').style('display', 'none');
+    }
+}
+
 
 function changeCountry() {
     randomNumber = Math.floor(Math.random() * mapData.features.length);
     drawMap();
+}
+
+function pass() {
+    if (wrongAnswer >= 3) {
+        wrongAnswer = 0;
+        drawPassButton(false);
+        changeCountry();
+    }
 }
 
 function redraw() {

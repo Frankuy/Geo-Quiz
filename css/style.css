@@ -5,6 +5,21 @@ html, body {
     background-color: #006994;
 }
 
+button {
+    background: lightgrey;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+button:hover, button:active {
+    background: grey;
+    color: white;
+    border: 2px solid white;
+}
+
 #game-svg {
     position: fixed;
     top: 0;
@@ -54,6 +69,9 @@ html, body {
 
 #end-game > button {
     font-size: 24px;
-    padding: 12px;
-    cursor: pointer;
+}
+
+#pass-button {
+    position: fixed;
+    display: none;
 }

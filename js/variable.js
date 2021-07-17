@@ -5,3 +5,4 @@ var randomNumber;
 var score;
 var time;
 var countdown;
+var wrongAnswer;

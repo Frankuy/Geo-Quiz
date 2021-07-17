@@ -11,6 +11,8 @@ function sound(src) {
     this.sound.style.display = "none";
     document.body.appendChild(this.sound);
     this.play = function() {
+        this.sound.pause();
+        this.sound.currentTime = 0;
         this.sound.play();
     }
     this.stop = function() {
