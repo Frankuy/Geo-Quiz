@@ -12,6 +12,7 @@ function newGame() {
 
     // Layout setting
     drawPassButton(false);
+    drawClue(false);
     d3.select('#user-input').property('disabled', false);
     d3.select('#start-game').style('display', 'flex');
     d3.select('#end-game').style('display', 'none');
@@ -39,6 +40,7 @@ function newGame() {
     // Draw game
     setTimeout(() => {
         drawMap();
+        drawClue(true);
         drawInput();
         drawScore();
         drawTimeRemaining();
@@ -122,7 +124,7 @@ function drawInput() {
                 })
                 userInput.value = '';
                 wrongAnswer += 1;
-                if (wrongAnswer == 3) {
+                if (wrongAnswer == passThreshold) {
                     drawPassButton(true);
                 }
             }
@@ -158,7 +160,7 @@ function drawScore() {
 
 function drawTimeRemaining() {
     var heightTime = 12;
-    var maxTime = 60000;
+    var maxTime = time;
     var timerFunction;
 
     var timeContainer = gameContainer.select('#time')
@@ -195,13 +197,9 @@ function drawTimeRemaining() {
         .attr('width', 0)
         .attrTween("fill", function() {
             return function(t) {
-                if (t >= 1 - 10000/maxTime)  {
-                    ticktock.speedup(1.25);
-                    return `rgb(${t * 255},0,${(1 - t) * 255})`
-                }
-                else {
-                    return "blue"
-                }
+                const interpolate = d3.interpolateRgb("blue", "red");
+                const scale = d3.scaleLog().domain([1 - 10000/maxTime, 1]).range([0, 1]).clamp(true);
+                return interpolate(scale(t));
             };
           });
 }
@@ -215,14 +213,49 @@ function drawPassButton(show) {
     }
 }
 
+function drawClue(show) {
+    var clueContainer = d3.select('#clue');
+
+    if (show) {
+        clueContainer.text(clue(mapData.features[randomNumber].properties.name.toUpperCase()));
+        clueContainer.style('display', 'block');
+
+        var widthClue = clueContainer.node().getBoundingClientRect().width;
+        var heightClue = clueContainer.node().getBoundingClientRect().height;
+        var left = width / 2 - widthClue / 2;
+        var top = height / 8 <= 80 ? 80 - heightClue / 2 : height / 8 - heightClue / 2;
+        
+        clueContainer.style('top', top + 'px').style('left', left + 'px')
+    }
+    else {
+        clueContainer.style('display', 'none');
+    }
+}
+
+function clue(name) {
+    var names = name.split(' ');
+    var clueName = names.map(val => {
+        if (val.length > 6) {
+            var rdx = 1 + Math.floor(Math.random() * (val.length - 1));
+            return val[0] + val.substr(1, rdx - 1).replace(/\D/g, "_") + val[rdx] + val.substr(rdx + 1, val.length).replace(/\D/g, "_");
+        }
+        else {
+            var rdx = Math.floor(Math.random() * val.length);
+            return val.substr(0, rdx).replace(/\D/g, "_") + val[rdx] + val.substr(rdx + 1, val.length).replace(/\D/g, "_");
+        }
+    }).join(' ');
+
+    return clueName;
+}
 
 function changeCountry() {
     randomNumber = Math.floor(Math.random() * mapData.features.length);
+    drawClue(true);
     drawMap();
 }
 
 function pass() {
-    if (wrongAnswer >= 3) {
+    if (wrongAnswer >= passThreshold) {
         wrongAnswer = 0;
         drawPassButton(false);
         changeCountry();
@@ -232,6 +265,7 @@ function pass() {
 function redraw() {
     width = window.innerWidth;
     height = window.innerHeight;
+    drawClue(true);
     drawMap();
     drawInput();
     drawScore();

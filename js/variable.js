@@ -6,3 +6,4 @@ var score;
 var time;
 var countdown;
 var wrongAnswer;
+const passThreshold = 1;

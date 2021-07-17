@@ -75,3 +75,31 @@ button:hover, button:active {
     position: fixed;
     display: none;
 }
+
+#clue {
+    position: fixed;
+    color: white;
+    background-color: green;
+    border: 2px solid white;
+    border-radius:  12px;
+    padding: 20px;
+    letter-spacing: 4px;
+    word-spacing: 8px;
+    display: none;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 740px) {
+    #clue {
+        font-size: 12px;
+    }
+
+    #end-game > span, #start-game > span {
+        font-size: 50px;
+    }
+    
+    #end-game > button {
+        font-size: 12px;
+    }
+}
