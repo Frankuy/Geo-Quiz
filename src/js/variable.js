@@ -7,3 +7,5 @@ var time;
 var countdown;
 var wrongAnswer;
 const passThreshold = 1;
+
+export { height, width, mapData, randomNumber, score, time, countdown, wrongAnswer, passThreshold }

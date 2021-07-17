@@ -1,3 +1,9 @@
+import * as d3 from 'd3';
+import { height, width, randomNumber, score, time, countdown, wrongAnswer, passThreshold } from './js/variable';
+import { ticktock, startgame, correct, incorrect } from './js/sound';
+import mapData from './asset/world.geo.json';
+import './css/style.css';
+
 // Game Container
 var gameContainer = d3.select('#game-svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
@@ -47,14 +53,15 @@ function newGame() {
     }, 5000)
 }
 
-function getData() {
-    d3.json("/asset/world.geojson")
-    .then(function (data) {
-        // Get map then game played
-        mapData = data;
-        newGame();
-    });
-}
+// function getData() {
+//     console.log(mapData);
+    // d3.json(GeoJson)
+    // .then(function (data) {
+    //     // Get map then game played
+    //     mapData = data;
+    //     newGame();
+    // });
+// }
 
 function drawMap() {
     var area = d3.geoPath().area(mapData.features[randomNumber])
@@ -271,6 +278,5 @@ function redraw() {
     drawScore();
 }
 
-getData();
+newGame();
 window.addEventListener("resize", redraw);
-
