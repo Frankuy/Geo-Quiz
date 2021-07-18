@@ -241,38 +241,6 @@ function drawTimeRemaining() {
             .duration(time)
             .ease(easeLinear)
             .attr('width', 0)
-            
-        // timeContainer
-            // .datum(time)
-            // .append('rect')
-            // .attr('id', 'time-remaining')
-            // .attr('width', width)
-            // .attr('height', heightTime)
-            // .attr('fill', 'blue')
-            // .transition()
-            // .duration(time)
-            // .ease(easeLinear)
-        // .on('start', function () {
-        //     ticktock.loop();
-        //     ticktock.speedup(1);
-        //     timerFunction = setInterval(() => {
-        //         time -= 1;
-        //     }, 1)
-        // })
-        // .on('end', function () {
-        //     ticktock.stop();
-        //     select('#end-game').style('display', 'flex');
-        //     select('#user-input').property('disabled', true);
-        //     clearInterval(timerFunction);
-        // })
-        // .attr('width', 0)
-        // .attrTween("fill", function () {
-        //     return function (t) {
-        //         const interpolate = interpolateRgb("blue", "red");
-        //         const scale = scaleLog().domain([1 - 10000 / maxTime, 1]).range([0, 1]).clamp(true);
-        //         return interpolate(scale(t));
-        //     };
-        // });
     }
     else {
         timeContainer.select('#time-container')
@@ -281,20 +249,13 @@ function drawTimeRemaining() {
         var timeRemaining = timeContainer.select('#time-remaining');
         
         timeRemaining.interrupt('width');
-        
+
         timeRemaining
             .attr('width', width * time / maxTime)
             .transition('width')
             .duration(time)
             .ease(easeLinear)
             .attr('width', 0)
-
-        // timeContainer.
-
-        // timeContainer.select('#time-remaining')
-        //     .attr('width', width)
-        // .attr('y', 0)
-        // .attr('height', heightTime)
     }
 }
 
