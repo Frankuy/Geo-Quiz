@@ -124,7 +124,7 @@ function drawInput() {
             if (userInput.value.toLowerCase() == mapData.features[randomNumber].properties.name.toLowerCase()) {
                 correct.play();
                 userInput.animate([
-                    { border: '2px solid green' },
+                    { border: '2px solid lightgreen' },
                     { border: '2px solid black' }
                 ],
                     {
@@ -326,9 +326,6 @@ function redraw() {
     width = window.innerWidth;
     height = window.innerHeight;
     if (countdown == -1) {
-        // gameContainer
-        //     .attr('viewBox', `0 0 ${width} ${height}`)
-
         drawScore();
         drawTimeRemaining();
         drawMap();
