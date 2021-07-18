@@ -32,12 +32,12 @@ button:hover, button:active {
 #user-input {
     position: fixed;
     padding: 12px;
-    font-size: 14px;
     border-radius: 12px;
     border: 2px solid black;
     display: none;
     z-index: 1;
-    width: 160px;
+    font-size: 14px;
+    max-width: 180px;
 }
 
 #user-input:focus {
@@ -63,12 +63,12 @@ button:hover, button:active {
 }
 
 #end-game > span, #start-game > span {
-    font-size: 100px;
+    font-size: 40px;
     color: white;
 }
 
 #end-game > button {
-    font-size: 24px;
+    font-size: 14px;
 }
 
 #pass-button {
@@ -86,20 +86,61 @@ button:hover, button:active {
     letter-spacing: 4px;
     word-spacing: 8px;
     display: none;
-    font-size: 32px;
     font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    max-width: 180px;
 }
 
-@media screen and (max-width: 740px) {
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
     #clue {
-        font-size: 12px;
+        font-size: 18px;
+        max-width: 480px;
+    }
+    #user-input {
+        font-size: 16px;
+        max-width: 200px;
+    }
+    #pass-button {
+        font-size: 16px;
     }
 
     #end-game > span, #start-game > span {
-        font-size: 50px;
+        font-size: 100px;
+    }
+    #end-game > button {
+        font-size: 24px;
     }
     
-    #end-game > button {
-        font-size: 12px;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    #clue {
+        font-size: 28px;
+        max-width: 480px;
+    }
+    #user-input {
+        font-size: 28px;
+        max-width: 320px;
+    }
+    #pass-button {
+        font-size: 28px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #clue {
+        font-size: 32px;
+        max-width: 480px;
+    }
+    #user-input {
+        font-size: 32px;
+        max-width: 400px;
+    }
+    #pass-button {
+        font-size: 32px;
     }
 }
