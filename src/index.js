@@ -1,11 +1,20 @@
-import * as d3 from 'd3';
-import { height, width, randomNumber, score, time, countdown, wrongAnswer, passThreshold } from './js/variable';
+import { select, geoPath, geoMercator, scaleLog, geoCentroid, interpolateRgb, extent, easeLinear } from 'd3';
 import { ticktock, startgame, correct, incorrect } from './js/sound';
 import mapData from './asset/world.geo.json';
 import './css/style.css';
 
+// Global Variable
+var height = window.innerHeight;
+var width = window.innerWidth;
+var randomNumber;
+var score;
+var time;
+var countdown;
+var wrongAnswer;
+const passThreshold = 1;
+
 // Game Container
-var gameContainer = d3.select('#game-svg')
+var gameContainer = select('#game-svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
 
 function newGame() {
@@ -19,13 +28,13 @@ function newGame() {
     // Layout setting
     drawPassButton(false);
     drawClue(false);
-    d3.select('#user-input').property('disabled', false);
-    d3.select('#start-game').style('display', 'flex');
-    d3.select('#end-game').style('display', 'none');
+    select('#user-input').property('disabled', false);
+    select('#start-game').style('display', 'flex');
+    select('#end-game').style('display', 'none');
 
     // Button event listener
-    d3.select('#new-game').on('click', function() { newGame(); })
-    d3.select('#pass-button').on('click', function() { pass(); })
+    select('#new-game').on('click', function() { newGame(); })
+    select('#pass-button').on('click', function() { pass(); })
     
     // Show start countdown event
     var timer = setInterval(() => {
@@ -33,12 +42,12 @@ function newGame() {
             startgame.play();
         }
         if (countdown <= 4 && countdown > 0) {
-            d3.select('#countdown').text(countdown);
+            select('#countdown').text(countdown);
         }
         else {
             clearInterval(timer);
-            d3.select('#countdown').text('');
-            d3.select('#start-game').style('display', 'none');
+            select('#countdown').text('');
+            select('#start-game').style('display', 'none');
         }
         countdown -= 1;
     }, 1000);
@@ -55,7 +64,7 @@ function newGame() {
 
 // function getData() {
 //     console.log(mapData);
-    // d3.json(GeoJson)
+    // json(GeoJson)
     // .then(function (data) {
     //     // Get map then game played
     //     mapData = data;
@@ -64,19 +73,19 @@ function newGame() {
 // }
 
 function drawMap() {
-    var area = d3.geoPath().area(mapData.features[randomNumber])
+    var area = geoPath().area(mapData.features[randomNumber])
 
-    var scaleLog = d3.scaleLog().domain(
-        d3.extent(mapData.features, feature => d3.geoPath().area(feature))
+    var log = scaleLog().domain(
+        extent(mapData.features, feature => geoPath().area(feature))
     ).range([1080, 50])
 
-    var projection = d3.geoMercator()
+    var projection = geoMercator()
         // .scale(1080)
-        .scale(scaleLog(area))
-        .center(d3.geoCentroid(mapData.features[randomNumber]))
+        .scale(log(area))
+        .center(geoCentroid(mapData.features[randomNumber]))
         .translate([width / 2, height / 2]);
     
-    var pathGenerator = d3.geoPath().projection(projection);
+    var pathGenerator = geoPath().projection(projection);
 
     var countryPath = gameContainer
         .select('#map')
@@ -94,11 +103,11 @@ function drawInput() {
     var widthInput = 160;
     var heightOffset = height / 4;
 
-    d3.select('#pass-button')
+    select('#pass-button')
         .style('top', (height - heightOffset) + 'px')
         .style('left', (width / 2 + widthInput / 2 + 24) + 'px')
 
-    d3.select('#user-input')
+    select('#user-input')
         .style('display', 'block')
         .style('top', (height - heightOffset) + 'px')
         .style('left', (width / 2 - widthInput / 2 - 8) + 'px')
@@ -187,7 +196,7 @@ function drawTimeRemaining() {
         .attr('fill', 'blue')
         .transition()
         .duration(time)
-        .ease(d3.easeLinear)
+        .ease(easeLinear)
         .on('start', function () {
             ticktock.loop();
             ticktock.speedup(1);
@@ -197,15 +206,15 @@ function drawTimeRemaining() {
         })
         .on('end', function () {
             ticktock.stop();
-            d3.select('#end-game').style('display', 'flex');
-            d3.select('#user-input').property('disabled', true);
+            select('#end-game').style('display', 'flex');
+            select('#user-input').property('disabled', true);
             clearInterval(timerFunction);
         })
         .attr('width', 0)
         .attrTween("fill", function() {
             return function(t) {
-                const interpolate = d3.interpolateRgb("blue", "red");
-                const scale = d3.scaleLog().domain([1 - 10000/maxTime, 1]).range([0, 1]).clamp(true);
+                const interpolate = interpolateRgb("blue", "red");
+                const scale = scaleLog().domain([1 - 10000/maxTime, 1]).range([0, 1]).clamp(true);
                 return interpolate(scale(t));
             };
           });
@@ -213,15 +222,15 @@ function drawTimeRemaining() {
 
 function drawPassButton(show) {
     if (show) {
-        d3.select('#pass-button').style('display', 'block');
+        select('#pass-button').style('display', 'block');
     }
     else {
-        d3.select('#pass-button').style('display', 'none');
+        select('#pass-button').style('display', 'none');
     }
 }
 
 function drawClue(show) {
-    var clueContainer = d3.select('#clue');
+    var clueContainer = select('#clue');
 
     if (show) {
         clueContainer.text(clue(mapData.features[randomNumber].properties.name.toUpperCase()));
@@ -269,14 +278,14 @@ function pass() {
     }
 }
 
-function redraw() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    drawClue(true);
-    drawMap();
-    drawInput();
-    drawScore();
-}
+// function redraw() {
+    // width = window.innerWidth;
+    // height = window.innerHeight;
+    // drawClue(true);
+    // drawMap();
+    // drawInput();
+    // drawScore();
+// }
 
 newGame();
-window.addEventListener("resize", redraw);
+// window.addEventListener("resize", redraw);
