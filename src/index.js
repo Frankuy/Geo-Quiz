@@ -42,10 +42,10 @@ function newGame() {
 
     // Show start countdown event
     var timer = setInterval(() => {
-        if (countdown == 4) {
-            startgame.play();
-        }
         if (countdown <= 4 && countdown > 0) {
+            if (countdown == 4) {
+                startgame.play();
+            }
             select('#countdown').text(countdown);
         }
         else {
@@ -337,5 +337,8 @@ function redraw() {
 window.addEventListener("resize", redraw);
 window.addEventListener("load", function() {
     select('#loading').remove();
-    newGame();
+    select('#countdown')
+        .style('cursor', 'pointer')
+        .text('Tap to start!')
+        .on('click', function() { newGame(); });
 })
