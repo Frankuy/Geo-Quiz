@@ -104,17 +104,19 @@ function drawMap() {
 }
 
 function drawInput() {
-    var widthInput = 160;
-    var heightOffset = 120;
+    var userInput = select('#user-input');
+    var heightOffset = width < 768 ? 80 : 120;
+
+    userInput.style('display', 'block')
+
+    var widthInput = select('#user-input').node().getBoundingClientRect().width;
+    userInput
+        .style('top', (height - heightOffset) + 'px')
+        .style('left', (width / 2 - widthInput / 2 - 8) + 'px')
 
     select('#pass-button')
         .style('top', (height - heightOffset) + 'px')
-        .style('left', (width / 2 + widthInput / 2 + 24) + 'px')
-
-    select('#user-input')
-        .style('display', 'block')
-        .style('top', (height - heightOffset) + 'px')
-        .style('left', (width / 2 - widthInput / 2 - 8) + 'px')
+        .style('left', (width / 2 + widthInput / 2) + 'px')
 
     var userInput = document.getElementById('user-input');
     userInput.addEventListener('keyup', function (event) {
@@ -302,8 +304,6 @@ function clue(name) {
         }
     }).join(' ');
 
-    // DEBUG
-    return "The United Kingdom of Great Britain and Northern Ireland";
     return clueName;
 }
 
