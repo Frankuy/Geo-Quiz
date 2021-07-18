@@ -337,5 +337,8 @@ function redraw() {
     }
 }
 
-newGame();
 window.addEventListener("resize", redraw);
+window.addEventListener("load", function() {
+    select('#loading').remove();
+    newGame();
+})
