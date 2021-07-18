@@ -92,7 +92,7 @@ button:hover, button:active {
 
 @media screen and (max-width: 740px) {
     #clue {
-        font-size: 12px;
+        font-size: 16px;
     }
 
     #end-game > span, #start-game > span {

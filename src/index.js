@@ -103,7 +103,7 @@ function drawMap() {
 
 function drawInput() {
     var widthInput = 160;
-    var heightOffset = height / 4;
+    var heightOffset = 120;
 
     select('#pass-button')
         .style('top', (height - heightOffset) + 'px')
@@ -152,28 +152,33 @@ function drawInput() {
 }
 
 function drawScore() {
-    var scoreContainer = gameContainer.select('#score').attr('transform', `translate(60, ${height / 8 <= 80 ? 80 : height / 8})`);
+    var top = width <= 740 ? 64 : 80;
+    var left = 60;
+    var radius = width <= 740 ? 32 : 40;
+    var fontSize = width <= 740 ? 24 : 32;
+
+    var scoreContainer = gameContainer.select('#score')
+        // .attr('transform', `translate(60, ${height / 8 <= 80 ? 80 : height / 8})`)
+        .attr('transform', `translate(${left}, ${top})`)
 
     scoreContainer.selectAll('*').remove();
 
     scoreContainer
         .append('circle')
-        .attr('r', 40)
+        .attr('r', radius)
         .attr('fill', 'green')
         .attr('stroke', 'white')
         .attr('stroke-width', 2)
-        .attr('cx', 40 / 2);
 
     scoreContainer
-        .datum(score)
         .append('text')
-        .attr('x', 40 / 2)
+        // .attr('x', center)
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline', 'middle')
         .attr('dy', 2)
         .attr('fill', 'white')
-        .attr('font-size', 32 - 2 * score.toString().length)
-        .text(d => d);
+        .attr('font-size', fontSize - 2 * score.toString().length)
+        .text(score);
 }
 
 function drawTimeRemaining() {
@@ -272,7 +277,8 @@ function drawClue(show) {
         var widthClue = clueContainer.node().getBoundingClientRect().width;
         var heightClue = clueContainer.node().getBoundingClientRect().height;
         var left = width / 2 - widthClue / 2;
-        var top = height / 8 <= 80 ? 80 - heightClue / 2 : height / 8 - heightClue / 2;
+        // var top = height / 8 <= 80 ? 80 - heightClue / 2 : height / 8 - heightClue / 2;
+        var top = 60;
 
         clueContainer.style('top', top + 'px').style('left', left + 'px')
     }
