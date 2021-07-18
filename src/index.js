@@ -81,9 +81,11 @@ function drawMap() {
         extent(mapData.features, feature => geoPath().area(feature))
     ).range([1080, 50])
 
+    var scale = width <= 740 ? log(area) : log(area) * width / 1200;
+
     var projection = geoMercator()
         // .scale(1080)
-        .scale(log(area))
+        .scale(scale)
         .center(geoCentroid(mapData.features[randomNumber]))
         .translate([width / 2, height / 2]);
 
@@ -275,10 +277,10 @@ function drawClue(show) {
         clueContainer.style('display', 'block');
 
         var widthClue = clueContainer.node().getBoundingClientRect().width;
-        var heightClue = clueContainer.node().getBoundingClientRect().height;
-        var left = width / 2 - widthClue / 2;
+        // var heightClue = clueContainer.node().getBoundingClientRect().height;
+        var left = width <= 740 ? width - widthClue - 30 : width / 2 - widthClue / 2;
         // var top = height / 8 <= 80 ? 80 - heightClue / 2 : height / 8 - heightClue / 2;
-        var top = 60;
+        var top = 30;
 
         clueContainer.style('top', top + 'px').style('left', left + 'px')
     }
@@ -300,6 +302,8 @@ function clue(name) {
         }
     }).join(' ');
 
+    // DEBUG
+    return "The United Kingdom of Great Britain and Northern Ireland";
     return clueName;
 }
 
@@ -327,7 +331,7 @@ function redraw() {
 
         drawScore();
         drawTimeRemaining();
-        // drawMap();
+        drawMap();
         drawInput();
         drawClue(true);
     }
