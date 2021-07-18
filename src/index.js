@@ -11,11 +11,14 @@ var score;
 var time;
 var countdown;
 var wrongAnswer;
+var clueName;
 const passThreshold = 1;
 
 // Game Container
 var gameContainer = select('#game-svg')
-    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('width', width)
+    .attr('height', height)
+// .attr('viewBox', `0 0 ${width} ${height}`)
 
 function newGame() {
     // Init variable
@@ -24,6 +27,7 @@ function newGame() {
     countdown = 4;
     randomNumber = Math.floor(Math.random() * mapData.features.length);
     wrongAnswer = 0;
+    clueName = clue(mapData.features[randomNumber].properties.name.toUpperCase());
 
     // Layout setting
     drawPassButton(false);
@@ -33,9 +37,9 @@ function newGame() {
     select('#end-game').style('display', 'none');
 
     // Button event listener
-    select('#new-game').on('click', function() { newGame(); })
-    select('#pass-button').on('click', function() { pass(); })
-    
+    select('#new-game').on('click', function () { newGame(); })
+    select('#pass-button').on('click', function () { pass(); })
+
     // Show start countdown event
     var timer = setInterval(() => {
         if (countdown == 4) {
@@ -64,12 +68,12 @@ function newGame() {
 
 // function getData() {
 //     console.log(mapData);
-    // json(GeoJson)
-    // .then(function (data) {
-    //     // Get map then game played
-    //     mapData = data;
-    //     newGame();
-    // });
+// json(GeoJson)
+// .then(function (data) {
+//     // Get map then game played
+//     mapData = data;
+//     newGame();
+// });
 // }
 
 function drawMap() {
@@ -84,7 +88,7 @@ function drawMap() {
         .scale(log(area))
         .center(geoCentroid(mapData.features[randomNumber]))
         .translate([width / 2, height / 2]);
-    
+
     var pathGenerator = geoPath().projection(projection);
 
     var countryPath = gameContainer
@@ -113,17 +117,17 @@ function drawInput() {
         .style('left', (width / 2 - widthInput / 2 - 8) + 'px')
 
     var userInput = document.getElementById('user-input');
-    userInput.addEventListener('keyup', function(event) {
+    userInput.addEventListener('keyup', function (event) {
         if (event.key == 'Enter') {
             if (userInput.value.toLowerCase() == mapData.features[randomNumber].properties.name.toLowerCase()) {
                 correct.play();
                 userInput.animate([
-                    {border: '2px solid green' },
-                    {border: '2px solid black' }
+                    { border: '2px solid green' },
+                    { border: '2px solid black' }
                 ],
-                {
-                    duration: 2000
-                })
+                    {
+                        duration: 2000
+                    })
                 userInput.value = '';
                 score += 1;
                 drawScore();
@@ -132,12 +136,12 @@ function drawInput() {
             else {
                 incorrect.play();
                 userInput.animate([
-                    {border: '2px solid red' },
-                    {border: '2px solid black' }
+                    { border: '2px solid red' },
+                    { border: '2px solid black' }
                 ],
-                {
-                    duration: 2000
-                })
+                    {
+                        duration: 2000
+                    })
                 userInput.value = '';
                 wrongAnswer += 1;
                 if (wrongAnswer == passThreshold) {
@@ -150,7 +154,7 @@ function drawInput() {
 }
 
 function drawScore() {
-    var scoreContainer = gameContainer.select('#score').attr('transform', `translate(60, ${height / 8 <= 80 ? 80 : height / 8 })`);
+    var scoreContainer = gameContainer.select('#score').attr('transform', `translate(60, ${height / 8 <= 80 ? 80 : height / 8})`);
 
     scoreContainer.selectAll('*').remove();
 
@@ -165,7 +169,7 @@ function drawScore() {
     scoreContainer
         .datum(score)
         .append('text')
-        .attr('x', 40 / 2)        
+        .attr('x', 40 / 2)
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline', 'middle')
         .attr('dy', 2)
@@ -176,48 +180,122 @@ function drawScore() {
 
 function drawTimeRemaining() {
     var heightTime = 12;
-    var maxTime = time;
+    var maxTime = 60000;
     var timerFunction;
 
     var timeContainer = gameContainer.select('#time')
         // .attr('transform', `translate(0, ${height - heightTime})`);
 
-    timeContainer
-        .append('rect')
-        .attr('width', width)
-        .attr('height', heightTime)
-        .attr('fill', 'white')
+    if (time == maxTime) {
+        timeContainer.selectAll('*').remove();
 
-    timeContainer
-        .datum(time)
-        .append('rect')
-        .attr('width', width)
-        .attr('height', heightTime)
-        .attr('fill', 'blue')
-        .transition()
-        .duration(time)
-        .ease(easeLinear)
-        .on('start', function () {
-            ticktock.loop();
-            ticktock.speedup(1);
-            timerFunction = setInterval(() => {
-                time -= 1000;
-            }, 1000)
-        })
-        .on('end', function () {
-            ticktock.stop();
-            select('#end-game').style('display', 'flex');
-            select('#user-input').property('disabled', true);
-            clearInterval(timerFunction);
-        })
-        .attr('width', 0)
-        .attrTween("fill", function() {
-            return function(t) {
-                const interpolate = interpolateRgb("blue", "red");
-                const scale = scaleLog().domain([1 - 10000/maxTime, 1]).range([0, 1]).clamp(true);
-                return interpolate(scale(t));
-            };
-          });
+        ////////////// DEBUG 
+        ticktock.loop();
+        ticktock.speedup(1);
+
+        timerFunction = setInterval(() => {
+            time -= 100;            
+            if (time == 0) {
+                ticktock.stop();
+                select('#end-game').style('display', 'flex');
+                select('#user-input').property('disabled', true);
+                clearInterval(timerFunction);
+            }
+            else if (time == 10000) {
+                ticktock.speedup(1.25);
+            }
+        }, 100);
+        ////////////////
+
+
+        timeContainer
+            .append('rect')
+            .attr('id', 'time-container')
+            .attr('width', width)
+            .attr('height', heightTime)
+            .attr('fill', 'white')
+        
+        var timeRemaining = timeContainer
+            .append('rect')
+            .attr('id', 'time-remaining')
+            .attr('width', width)
+            .attr('height', heightTime)
+            .attr('fill', 'blue')
+        
+        // Add Transition Color
+        timeRemaining
+            .transition('color')
+            .duration(time)
+            .ease(easeLinear)
+            .attrTween("fill", function () {
+                return function (t) {
+                    const interpolate = interpolateRgb("blue", "red");
+                    const scale = scaleLog().domain([1 - 10000 / maxTime, 1]).range([0, 1]).clamp(true);
+                    return interpolate(scale(t));
+                };
+            });
+
+        // Add Transition Width
+        timeRemaining
+            .transition('width')
+            .duration(time)
+            .ease(easeLinear)
+            .attr('width', 0)
+            
+        // timeContainer
+            // .datum(time)
+            // .append('rect')
+            // .attr('id', 'time-remaining')
+            // .attr('width', width)
+            // .attr('height', heightTime)
+            // .attr('fill', 'blue')
+            // .transition()
+            // .duration(time)
+            // .ease(easeLinear)
+        // .on('start', function () {
+        //     ticktock.loop();
+        //     ticktock.speedup(1);
+        //     timerFunction = setInterval(() => {
+        //         time -= 1;
+        //     }, 1)
+        // })
+        // .on('end', function () {
+        //     ticktock.stop();
+        //     select('#end-game').style('display', 'flex');
+        //     select('#user-input').property('disabled', true);
+        //     clearInterval(timerFunction);
+        // })
+        // .attr('width', 0)
+        // .attrTween("fill", function () {
+        //     return function (t) {
+        //         const interpolate = interpolateRgb("blue", "red");
+        //         const scale = scaleLog().domain([1 - 10000 / maxTime, 1]).range([0, 1]).clamp(true);
+        //         return interpolate(scale(t));
+        //     };
+        // });
+    }
+    else {
+        timeContainer.select('#time-container')
+            .attr('width', width)
+        
+        var timeRemaining = timeContainer.select('#time-remaining');
+        
+        timeRemaining.interrupt('width');
+        
+        timeRemaining
+            .attr('width', width * time / maxTime)
+            .transition('width')
+            .duration(time)
+            .ease(easeLinear)
+            .attr('width', 0)
+
+        // timeContainer.
+
+        // timeContainer.select('#time-remaining')
+        //     .attr('width', width)
+        // .attr('y', 0)
+        // .attr('height', heightTime)
+    }
 }
 
 function drawPassButton(show) {
@@ -233,14 +311,14 @@ function drawClue(show) {
     var clueContainer = select('#clue');
 
     if (show) {
-        clueContainer.text(clue(mapData.features[randomNumber].properties.name.toUpperCase()));
+        clueContainer.text(clueName);
         clueContainer.style('display', 'block');
 
         var widthClue = clueContainer.node().getBoundingClientRect().width;
         var heightClue = clueContainer.node().getBoundingClientRect().height;
         var left = width / 2 - widthClue / 2;
         var top = height / 8 <= 80 ? 80 - heightClue / 2 : height / 8 - heightClue / 2;
-        
+
         clueContainer.style('top', top + 'px').style('left', left + 'px')
     }
     else {
@@ -266,6 +344,7 @@ function clue(name) {
 
 function changeCountry() {
     randomNumber = Math.floor(Math.random() * mapData.features.length);
+    clueName = clue(mapData.features[randomNumber].properties.name.toUpperCase());
     drawClue(true);
     drawMap();
 }
@@ -278,14 +357,20 @@ function pass() {
     }
 }
 
-// function redraw() {
-    // width = window.innerWidth;
-    // height = window.innerHeight;
-    // drawClue(true);
-    // drawMap();
-    // drawInput();
-    // drawScore();
-// }
+function redraw() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    if (countdown == -1) {
+        // gameContainer
+        //     .attr('viewBox', `0 0 ${width} ${height}`)
+
+        // drawScore();
+        drawTimeRemaining();
+        // drawMap();
+        drawInput();
+        drawClue(true);
+    }
+}
 
 newGame();
-// window.addEventListener("resize", redraw);
+window.addEventListener("resize", redraw);
