@@ -1,5 +1,5 @@
 # Geo-Quiz
-Web-based game guessing what country is on highlighted map. [Play it!]( https://frankuy.github.io/geo-quiz)
+Web-based game guessing what country is on the highlighted map. [Play it!]( https://frankuy.github.io/geo-quiz)
 
 ## How to build
 ```
