@@ -52,18 +52,16 @@ function newGame() {
             clearInterval(timer);
             select('#countdown').text('');
             select('#start-game').style('display', 'none');
+
+            // Draw game
+            drawMap();
+            drawClue(true);
+            drawInput();
+            drawScore();
+            drawTimeRemaining();
         }
         countdown -= 1;
     }, 1000);
-
-    // Draw game
-    setTimeout(() => {
-        drawMap();
-        drawClue(true);
-        drawInput();
-        drawScore();
-        drawTimeRemaining();
-    }, 5000)
 }
 
 // function getData() {
@@ -181,7 +179,6 @@ function drawScore() {
 function drawTimeRemaining() {
     var heightTime = 12;
     var maxTime = 60000;
-    var timerFunction;
 
     var timeContainer = gameContainer.select('#time')
         // .attr('transform', `translate(0, ${height - heightTime})`);
@@ -189,11 +186,10 @@ function drawTimeRemaining() {
     if (time == maxTime) {
         timeContainer.selectAll('*').remove();
 
-        ////////////// DEBUG 
         ticktock.loop();
         ticktock.speedup(1);
 
-        timerFunction = setInterval(() => {
+        var timerFunction = setInterval(() => {
             time -= 100;            
             if (time == 0) {
                 ticktock.stop();
@@ -205,8 +201,6 @@ function drawTimeRemaining() {
                 ticktock.speedup(1.25);
             }
         }, 100);
-        ////////////////
-
 
         timeContainer
             .append('rect')
@@ -325,7 +319,7 @@ function redraw() {
         // gameContainer
         //     .attr('viewBox', `0 0 ${width} ${height}`)
 
-        // drawScore();
+        drawScore();
         drawTimeRemaining();
         // drawMap();
         drawInput();
