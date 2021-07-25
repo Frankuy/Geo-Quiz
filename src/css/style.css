@@ -2,12 +2,12 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #006994;
+    /* background-color: #006994; */
 }
 
 button {
-    background: lightgrey;
-    border: 2px solid black;
+    background: #1DA2D8;
+    border: 2px solid #2E8CB2;
     border-radius: 12px;
     padding: 12px;
     cursor: pointer;

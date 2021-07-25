@@ -1,7 +1,8 @@
+import './css/style.css';
+import './css/main-menu.css';
 import { select, geoPath, geoMercator, scaleLog, geoCentroid, interpolateRgb, extent, easeLinear } from 'd3';
 import { ticktock, startgame, correct, incorrect } from './js/sound';
 import mapData from './asset/world.geo.json';
-import './css/style.css';
 
 // Global Variable
 var height = window.innerHeight;

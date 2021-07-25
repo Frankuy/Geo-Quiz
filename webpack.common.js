@@ -25,7 +25,7 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
-                test: /\.(wav)$/i,
+                test: /\.(wav|png)$/i,
                 type: 'asset/resource',
             },
         ],
