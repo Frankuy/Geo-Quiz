@@ -1,0 +1,39 @@
+#main-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    display: none;
+}
+
+/* Logo */
+#main-menu > #logo {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    background: url('../asset/image/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50em;
+    height: 50em;
+    transform: translate(-50%, -50%);
+}
+
+/* Explore Button */
+#main-menu > #explore-button {
+    position: absolute;
+    top: 8%;
+    right: calc(4em + 2%);
+    background-image: url('../asset/image/explore.png');
+}
+
+/* Setting Button */
+#main-menu > #setting-button {
+    position: absolute;
+    top: 8%;
+    right: 0%;
+    background-image: url('../asset/image/setting.png');
+}

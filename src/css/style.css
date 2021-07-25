@@ -1,23 +1,73 @@
+@font-face {
+    font-family: Sura;
+    src: url('../asset/font/Sura-Regular.ttf');
+}
+
+@font-face {
+    font-family: Sura;
+    src: url('../asset/font/Sura-Bold.ttf');
+    font-weight: bold;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #006994;
+    background-color: #064273;
 }
 
-button {
-    background: lightgrey;
-    border: 2px solid black;
+* {
+    font-family: Sura, serif;
+}
+
+.button-box {
+    font-size: 2em;
+    font-weight: bold;
     border-radius: 12px;
-    padding: 12px;
+    padding: 0.6em 2em;
     cursor: pointer;
     z-index: 1;
+    background: #1DA2D8;
+    color: white;
+    border: 0.2em solid #2E8CB2;
 }
 
-button:hover, button:active {
-    background: grey;
+.button-box:hover, .button-box:active {
+    background: white;
+    color: #2E8CB2;
+    border: 0.2em solid lavender;
+}
+
+.button-center {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 4em;
+    height: 4em;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.button-toggle {
+    font-size: 1em;
+    border-radius: 20px;
+    min-width: 20%;
+    min-height: 3em;
+    cursor: pointer;
+    background-color: transparent;
     color: white;
     border: 2px solid white;
+}
+
+.font-bold {
+    font-weight: bold;
 }
 
 #game-svg {
@@ -50,7 +100,6 @@ button:hover, button:active {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
     z-index: 2;
     display: none;
     justify-content: center;

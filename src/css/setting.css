@@ -1,0 +1,34 @@
+#setting {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#setting .container {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    width: 75%;
+    transform: translate(-50%, -50%);
+}
+
+#setting .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2em;
+    margin: 2em;
+}
+
+/* Close Button */
+#setting #close-button {
+    position: absolute;
+    top: 8%;
+    right: 0%;
+    background-image: url('../asset/image/close.png');
+}

@@ -1,7 +1,9 @@
-import { select, geoPath, geoMercator, scaleLog, geoCentroid, interpolateRgb, extent, easeLinear } from 'd3';
+import './css/style.css';
+import './css/main-menu.css';
+import './css/setting.css';
+import { select, geoPath, geoMercator, scaleLog, geoCentroid, interpolateRgb, extent, easeLinear, selectAll } from 'd3';
 import { ticktock, startgame, correct, incorrect } from './js/sound';
 import mapData from './asset/world.geo.json';
-import './css/style.css';
 
 // Global Variable
 var height = window.innerHeight;
@@ -14,16 +16,20 @@ var wrongAnswer;
 var clueName;
 const passThreshold = 1;
 
+// Setting
+var time_setting = '60 s';
+var mode_setting = 'Choices';
+
 // Game Container
 var gameContainer = select('#game-svg')
     .attr('width', width)
     .attr('height', height)
 // .attr('viewBox', `0 0 ${width} ${height}`)
 
-function newGame() {
+function newGame(mode, time_ms) {
     // Init variable
     score = 0;
-    time = 60000;
+    time = time_ms;
     countdown = 4;
     randomNumber = Math.floor(Math.random() * mapData.features.length);
     wrongAnswer = 0;
@@ -37,7 +43,7 @@ function newGame() {
     select('#end-game').style('display', 'none');
 
     // Button event listener
-    select('#new-game').on('click', function () { newGame(); })
+    select('#new-game').on('click', function () { newGame(mode_setting, stringToMs(time_setting)); })
     select('#pass-button').on('click', function () { pass(); })
 
     // Show start countdown event
@@ -187,7 +193,7 @@ function drawScore() {
 
 function drawTimeRemaining() {
     var heightTime = 12;
-    var maxTime = 60000;
+    var maxTime = stringToMs(time_setting);
 
     var timeContainer = gameContainer.select('#time')
         // .attr('transform', `translate(0, ${height - heightTime})`);
@@ -334,11 +340,79 @@ function redraw() {
     }
 }
 
+function stringToMs(string) {
+    if (string == '60 s') {
+        return 60 * 1000;
+    }
+    else if (string == '3 m') {
+        return 3 * 60 * 1000;
+    }
+    else if (string == '5 m') {
+        return 5 * 60 * 1000;
+    }
+    else if (string == '10 m') {
+        return 10 * 60 * 1000;
+    }
+}
+
 window.addEventListener("resize", redraw);
 window.addEventListener("load", function() {
-    select('#loading').remove();
-    select('#countdown')
-        .style('cursor', 'pointer')
-        .text('Tap to start!')
-        .on('click', function() { newGame(); });
+    // Remove Loading
+    select("#loading").remove();
+    select("#start-game").style("display", "none");
+
+    // Show Main Menu
+    select("#main-menu").style("display", "block");
+    select("#setting").style("bottom", `-${height}px`);
+
+    // Setting Button
+    select("#setting-button").on("click", () => {
+        select("#setting").transition().duration(400).style("bottom", "0px");
+    })
+
+    // Close Button
+    select("#close-button").on("click", () => {
+        select("#setting").transition().duration(400).style("bottom", `-${height}px`);
+    })
+
+    // Play Button
+    selectAll(".play-button").on("click", () => {
+        select("#main-menu").style("display", "none");
+        select("#setting").style("bottom", `-${height}px`);
+        newGame(mode_setting, stringToMs(time_setting));
+    })
+
+    // Mode Button
+    let mode_button = select("#mode-button");
+    mode_button.on("click", function() {
+        if (mode_setting == 'Choices') {
+            mode_setting = 'Text';
+            mode_button.text(mode_setting);
+        }
+        else {
+            mode_setting = 'Choices';
+            mode_button.text(mode_setting);
+        }
+    })
+
+    // Time Button
+    let time_button = select("#time-button");
+    time_button.on("click", function() {
+        if (time_setting == '60 s') {
+            time_setting = '3 m';
+            time_button.text(time_setting);
+        }
+        else if (time_setting == '3 m') {
+            time_setting = '5 m';
+            time_button.text(time_setting);
+        }
+        else if (time_setting == '5 m') {
+            time_setting = '10 m';
+            time_button.text(time_setting);
+        }
+        else {
+            time_setting = '60 s';
+            time_button.text(time_setting);
+        }
+    })
 })
