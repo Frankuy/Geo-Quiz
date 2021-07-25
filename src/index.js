@@ -103,8 +103,8 @@ function drawMap() {
         .data(mapData.features)
 
     countryPath.join("path")
-        .attr("fill", (d, i) => i == randomNumber ? "blue" : "grey")
-        .attr("stroke", (d, i) => i == randomNumber ? "white" : "white")
+        .attr("fill", (d, i) => i == randomNumber ? "#2E8CB2" : "#BAD0DC")
+        .attr("stroke", (d, i) => i == randomNumber ? "white" : "#BAD0DC")
         .attr("stroke-width", (d, i) => i == randomNumber ? 2 : 1)
         .attr("d", pathGenerator);
 }
@@ -176,7 +176,7 @@ function drawScore() {
     scoreContainer
         .append('circle')
         .attr('r', radius)
-        .attr('fill', 'green')
+        .attr('fill', '#2E8CB2')
         .attr('stroke', 'white')
         .attr('stroke-width', 2)
 
@@ -229,7 +229,7 @@ function drawTimeRemaining() {
             .attr('id', 'time-remaining')
             .attr('width', width)
             .attr('height', heightTime)
-            .attr('fill', 'blue')
+            .attr('fill', '#1DA2D8')
         
         // Add Transition Color
         timeRemaining
@@ -238,7 +238,7 @@ function drawTimeRemaining() {
             .ease(easeLinear)
             .attrTween("fill", function () {
                 return function (t) {
-                    const interpolate = interpolateRgb("blue", "red");
+                    const interpolate = interpolateRgb("#1DA2D8", "red");
                     const scale = scaleLog().domain([1 - 10000 / maxTime, 1]).range([0, 1]).clamp(true);
                     return interpolate(scale(t));
                 };

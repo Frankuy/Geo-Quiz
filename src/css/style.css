@@ -128,7 +128,7 @@ html, body {
 #clue {
     position: fixed;
     color: white;
-    background-color: green;
+    background-color: #2E8CB2;
     border: 2px solid white;
     border-radius:  12px;
     padding: 20px;
