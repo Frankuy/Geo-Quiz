@@ -6,29 +6,8 @@
     width: 100%;
     background-color: #064273;
     font-size: 1rem;
+    display: none;
 }
-
-#main-menu > button {
-    font-family: Sura, serif;
-    font-size: 2em;
-    font-weight: bold;
-    border-radius: 12px;
-    padding: 0.6em 2em;
-    cursor: pointer;
-    z-index: 1;
-
-    transition: 0.4s ease-in-out;
-    background: #1DA2D8;
-    color: white;
-    border: 6px solid #2E8CB2;
-}
-
-#main-menu > button:hover, button:active {
-    background: white;
-    color: #2E8CB2;
-    border: 6px solid lavender;
-}
-
 
 /* Logo */
 #main-menu > #logo {
@@ -44,27 +23,12 @@
     transform: translate(-50%, -50%);
 }
 
-/* Play Button */
-#main-menu > #play-button {
-    position: absolute;
-    bottom: 12%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 /* Explore Button */
 #main-menu > #explore-button {
     position: absolute;
     top: 8%;
     right: calc(4em + 2%);
-    background: url('../asset/image/explore.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 4em;
-    height: 4em;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
+    background-image: url('../asset/image/explore.png');
 }
 
 /* Setting Button */
@@ -72,12 +36,5 @@
     position: absolute;
     top: 8%;
     right: 0%;
-    background: url('../asset/image/setting.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 4em;
-    height: 4em;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
+    background-image: url('../asset/image/setting.png');
 }

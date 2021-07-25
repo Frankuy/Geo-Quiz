@@ -1,5 +1,6 @@
 import './css/style.css';
 import './css/main-menu.css';
+import './css/setting.css';
 import { select, geoPath, geoMercator, scaleLog, geoCentroid, interpolateRgb, extent, easeLinear } from 'd3';
 import { ticktock, startgame, correct, incorrect } from './js/sound';
 import mapData from './asset/world.geo.json';
@@ -337,9 +338,23 @@ function redraw() {
 
 window.addEventListener("resize", redraw);
 window.addEventListener("load", function() {
-    select('#loading').remove();
-    select('#countdown')
-        .style('cursor', 'pointer')
-        .text('Tap to start!')
-        .on('click', function() { newGame(); });
+    // Show Main Menu
+    select("#main-menu").style("display", "block");
+    select("#setting").style("bottom", `-${height}px`);
+
+    // Setting Button
+    select("#setting-button").on("click", () => {
+        select("#setting").transition().duration(400).style("bottom", "0px");
+    })
+
+    // Close Button
+    select("#close-button").on("click", () => {
+        select("#setting").transition().duration(400).style("bottom", `-${height}px`);
+    })
+
+    // select('#loading').remove();
+    // select('#countdown')
+    //     .style('cursor', 'pointer')
+    //     .text('Tap to start!')
+    //     .on('click', function() { newGame(); });
 })
