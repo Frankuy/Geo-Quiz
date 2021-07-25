@@ -1,0 +1,45 @@
+.button-box {
+    font-size: 2em;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 0.6em 2em;
+    cursor: pointer;
+    z-index: 1;
+    background: #1DA2D8;
+    color: white;
+    border: 0.2em solid #2E8CB2;
+}
+
+.button-box:hover, .button-box:active {
+    background: white;
+    color: #2E8CB2;
+    border: 0.2em solid lavender;
+}
+
+.button-center {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 4em;
+    height: 4em;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.button-toggle {
+    font-size: 1em;
+    border-radius: 20px;
+    min-width: 20%;
+    min-height: 3em;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
