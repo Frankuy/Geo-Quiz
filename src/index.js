@@ -1,6 +1,12 @@
+import './css/font.css';
 import './css/style.css';
+import './css/utils.css';
+import './css/button.css';
 import './css/main-menu.css';
 import './css/setting.css';
+import './css/game.css';
+import './css/utils.css';
+
 import { select, geoPath, geoMercator, scaleLog, geoCentroid, interpolateRgb, extent, easeLinear, selectAll } from 'd3';
 import { ticktock, startgame, correct, incorrect } from './js/sound';
 import mapData from './asset/world.geo.json';
@@ -110,19 +116,19 @@ function drawMap() {
 }
 
 function drawInput() {
-    var userInput = select('#user-input');
-    var heightOffset = width < 768 ? 80 : 120;
+    select('#input-container').style('display', 'flex');
+    // var heightOffset = width < 768 ? 80 : 120;
 
-    userInput.style('display', 'block')
+    // userInput.style('display', 'block')
 
-    var widthInput = select('#user-input').node().getBoundingClientRect().width;
-    userInput
-        .style('top', (height - heightOffset) + 'px')
-        .style('left', (width / 2 - widthInput / 2 - 8) + 'px')
+    // var widthInput = select('#user-input').node().getBoundingClientRect().width;
+    // userInput
+    //     .style('top', (height - heightOffset) + 'px')
+    //     .style('left', (width / 2 - widthInput / 2 - 8) + 'px')
 
-    select('#pass-button')
-        .style('top', (height - heightOffset) + 'px')
-        .style('left', (width / 2 + widthInput / 2) + 'px')
+    // select('#pass-button')
+    //     .style('top', (height - heightOffset) + 'px')
+    //     .style('left', (width / 2 + widthInput / 2) + 'px')
 
     var userInput = document.getElementById('user-input');
     userInput.addEventListener('keyup', function (event) {
@@ -130,8 +136,8 @@ function drawInput() {
             if (userInput.value.toLowerCase() == mapData.features[randomNumber].properties.name.toLowerCase()) {
                 correct.play();
                 userInput.animate([
-                    { border: '2px solid lightgreen' },
-                    { border: '2px solid black' }
+                    { border: '6px solid lightgreen' },
+                    { border: '6px solid #2E8CB2' }
                 ],
                     {
                         duration: 2000
@@ -144,8 +150,8 @@ function drawInput() {
             else {
                 incorrect.play();
                 userInput.animate([
-                    { border: '2px solid red' },
-                    { border: '2px solid black' }
+                    { border: '6px solid red' },
+                    { border: '6px solid #2E8CB2' }
                 ],
                     {
                         duration: 2000
@@ -270,10 +276,12 @@ function drawTimeRemaining() {
 
 function drawPassButton(show) {
     if (show) {
-        select('#pass-button').style('display', 'block');
+        // select('#pass-button').style('display', 'block');
+        select('#pass-button').property('disabled', false);
     }
     else {
-        select('#pass-button').style('display', 'none');
+        // select('#pass-button').style('display', 'none');
+        select('#pass-button').property('disabled', true);
     }
 }
 
@@ -284,13 +292,13 @@ function drawClue(show) {
         clueContainer.text(clueName);
         clueContainer.style('display', 'block');
 
-        var widthClue = clueContainer.node().getBoundingClientRect().width;
+        // var widthClue = clueContainer.node().getBoundingClientRect().width;
         // var heightClue = clueContainer.node().getBoundingClientRect().height;
-        var left = width <= 740 ? width - widthClue - 30 : width / 2 - widthClue / 2;
+        // var left = width <= 740 ? width - widthClue - 30 : width / 2 - widthClue / 2;
         // var top = height / 8 <= 80 ? 80 - heightClue / 2 : height / 8 - heightClue / 2;
-        var top = 30;
+        // var top = 30;
 
-        clueContainer.style('top', top + 'px').style('left', left + 'px')
+        // clueContainer.style('top', top + 'px').style('left', left + 'px')
     }
     else {
         clueContainer.style('display', 'none');

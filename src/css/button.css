@@ -16,6 +16,12 @@
     border: 0.2em solid lavender;
 }
 
+.button-box:disabled {
+    background: #d3d3d3;
+    color: lightslategray;
+    border: 0.2em solid #a3a3a3;
+}
+
 .button-center {
     position: absolute;
     bottom: 12%;

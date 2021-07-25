@@ -12,14 +12,27 @@
 </head>
 
 <body>
-    <svg id="game-svg">
-        <g id="map" />
-        <g id="score" />
-        <g id="time" />
-    </svg>
-    <input type="text" id="user-input" placeholder="Enter your answer" />
-    <button id="pass-button" class="button-box">PASS</button>
-    <div id="clue"></div>
+    <!-- Game -->
+    <div id="game">
+        <svg id="game-svg">
+            <g id="map" />
+            <g id="score" />
+            <g id="time" />
+        </svg>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Enter your answer" autocomplete="off" />
+            <button id="pass-button" class="button-box">PASS</button>
+        </div>
+        <div id="clue"></div>
+        <div id="end-game">
+            <span>TIME'S UP</span>
+            <button id="new-game" class="button-box">NEW GAME</button>
+        </div>
+        <div id="start-game">
+            <div id="loading" class="lds-dual-ring"></div>
+            <span id="countdown"></span>
+        </div>
+    </div>
 
     <!-- Main Menu  -->
     <div id="main-menu">
@@ -43,16 +56,6 @@
             </div>
         </div>
         <button class="play-button button-box button-center">PLAY</button>
-    </div>
-    
-    <div id="end-game">
-        <span>TIME'S UP</span>
-        <button id="new-game">NEW GAME</button>
-    </div>
-
-    <div id="start-game">
-        <div id="loading" class="lds-dual-ring"></div>
-        <span id="countdown"></span>
     </div>
 </body>
 
