@@ -160,7 +160,7 @@ const Game = () => {
         while (choices.length != 4) {
             let newRandom = Math.floor(Math.random() * mapData.features.length);
             let posRandom = Math.random();
-            if (!choices.includes(newRandom)) {
+            if (!choices.includes(mapData.features[newRandom].properties.name.toUpperCase())) {
                 if (posRandom < 0.5) {
                     choices.unshift(mapData.features[newRandom].properties.name.toUpperCase());
                 }
