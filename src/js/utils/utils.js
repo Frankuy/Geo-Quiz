@@ -15,16 +15,16 @@ export function clue(name) {
 }
 
 export function stringToMs(string) {
-    if (string == '60 s') {
+    if (string == '60s') {
         return 60 * 1000;
     }
-    else if (string == '3 m') {
+    else if (string == '3m') {
         return 3 * 60 * 1000;
     }
-    else if (string == '5 m') {
+    else if (string == '5m') {
         return 5 * 60 * 1000;
     }
-    else if (string == '10 m') {
+    else if (string == '10m') {
         return 10 * 60 * 1000;
     }
 }

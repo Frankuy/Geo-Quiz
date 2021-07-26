@@ -19,35 +19,40 @@
 #input-container {
     position: absolute;
     bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
     width: 100%;
-    padding: 28px;
-    display: none;
+    /* padding: 28px; */
+    /* margin: 28px; */
     z-index: 1;
+    display: flex;
 }
 
 #user-input {
-    width: 80%;
+    flex: 8;
     font-size: 2em;
     padding: 0.6em;
+    margin: 0.6em;
     border-radius: 12px;
     border: 6px solid #2E8CB2;
-    /* max-width: 180px; */
 }
 
 #user-input:disabled {
     background: white;
 }
 
+#user-input:focus {
+    outline: none;
+}
+
 #pass-button {
-    flex-grow: 1;
-    margin-left: 0.6em;
-    margin-right: 2em;
-    /* margin: 12px; */
+    flex: 1;
+    margin: 0.6em;
 }
 
 #clue {
     position: fixed;
-    top: 10%;
+    top: 80px;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -57,15 +62,10 @@
     padding: 20px;
     letter-spacing: 4px;
     word-spacing: 8px;
-    display: none;
     font-weight: bold;
     text-align: center;
     font-size: 2em;
     /* max-width: 180px; */
-}
-
-#user-input:focus {
-    outline: none;
 }
 
 #end-game, #start-game {
@@ -76,7 +76,7 @@
     height: 100%;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.2);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
