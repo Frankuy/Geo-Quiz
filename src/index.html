@@ -12,48 +12,7 @@
 </head>
 
 <body>
-    <svg id="game-svg">
-        <g id="map" />
-        <g id="score" />
-        <g id="time" />
-    </svg>
-    <input type="text" id="user-input" placeholder="Enter your answer" />
-    <button id="pass-button">PASS</button>
-    <div id="clue"></div>
-
-    <!-- Main Menu  -->
-    <div id="main-menu">
-        <div id="logo"></div>
-        <div id="explore-button" class="button-icon" title="Explore"></div>
-        <div id="setting-button" class="button-icon" title="Setting"></div>
-        <button class="play-button button-box button-center">PLAY</button>
-    </div>
-
-    <!-- Setting Page  -->
-    <div id="setting">
-        <div id="close-button" class="button-icon" title="Close"></div>
-        <div class="container">
-            <div id="mode" class="row">
-                <div class="font-bold">Mode</div>
-                <button id="mode-button" class="font-bold button-toggle">Choices</button>
-            </div>
-            <div id="time" class="row">
-                <div class="font-bold">Time</div>
-                <button id="time-button" class="font-bold button-toggle">60 s</button>
-            </div>
-        </div>
-        <button class="play-button button-box button-center">PLAY</button>
-    </div>
-    
-    <div id="end-game">
-        <span>TIME'S UP</span>
-        <button id="new-game">NEW GAME</button>
-    </div>
-
-    <div id="start-game">
-        <div id="loading" class="lds-dual-ring"></div>
-        <span id="countdown"></span>
-    </div>
+    <div id="root"></div>
 </body>
 
 </html>

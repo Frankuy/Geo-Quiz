@@ -5,11 +5,10 @@
     height: 100%;
     width: 100%;
     font-size: 1rem;
-    display: none;
 }
 
 /* Logo */
-#main-menu > #logo {
+#logo {
     position: absolute;
     top: 45%;
     left: 50%;
@@ -23,7 +22,7 @@
 }
 
 /* Explore Button */
-#main-menu > #explore-button {
+#explore-button {
     position: absolute;
     top: 8%;
     right: calc(4em + 2%);
@@ -31,7 +30,7 @@
 }
 
 /* Setting Button */
-#main-menu > #setting-button {
+#setting-button {
     position: absolute;
     top: 8%;
     right: 0%;
