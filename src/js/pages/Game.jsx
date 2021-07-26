@@ -113,6 +113,11 @@ const Game = () => {
         let animation = null;
         let rightAnswer = mapData.features[state.randomNumber].properties.name.toUpperCase();
         for (let button of buttons) {
+            // Prevent Double Clicking
+            button.disabled = true;
+        }
+
+        for (let button of buttons) {
             let color = button.value == rightAnswer ? 'lightgreen' : 'red';
             animation = button.animate(
                 [
@@ -124,7 +129,11 @@ const Game = () => {
                 }
             )
         }
+
         animation.addEventListener('finish', () => {
+            for (let button of buttons) {
+                button.disabled = false;
+            }
             changeCountry();
         });
     }
