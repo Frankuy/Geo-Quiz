@@ -1,33 +1,51 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
-        index: './src/index.js',
-        sound: './src/js/sound.js',
+        index: './src/index.js'
     },
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
+        publicPath: '/'
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
         }),
-        new MiniCssExtractPlugin(),
     ],
     module: {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.(wav)$/i,
+                test: /\.(wav|png)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.(js|jsx)$/i,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react"
+                        ],
+                    }
+                }
+            },
         ],
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx'],
     },
 };

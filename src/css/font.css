@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Sura;
+    src: url('../asset/font/Sura-Regular.ttf');
+}
+
+@font-face {
+    font-family: Sura;
+    src: url('../asset/font/Sura-Bold.ttf');
+    font-weight: bold;
+}

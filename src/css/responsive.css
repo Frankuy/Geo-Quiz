@@ -1,0 +1,66 @@
+@media (max-width: 575px) {
+    html {
+        font-size: 6px;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    html {
+        font-size: 10px;
+    }
+    /* #clue {
+        font-size: 18px;
+        max-width: 480px;
+    }
+    #user-input {
+        font-size: 16px;
+        max-width: 200px;
+    }
+    #pass-button {
+        font-size: 16px;
+    }
+
+    #end-game > span, #start-game > span {
+        font-size: 100px;
+    }
+    #end-game > button {
+        font-size: 24px;
+    } */
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    /* #clue {
+        font-size: 28px;
+        max-width: 480px;
+    }
+    #user-input {
+        font-size: 28px;
+        max-width: 320px;
+    }
+    #pass-button {
+        font-size: 28px;
+    } */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    html {
+        font-size: 20px;
+    }
+    /* #clue {
+        font-size: 32px;
+        max-width: 480px;
+    }
+    #user-input {
+        font-size: 32px;
+        max-width: 400px;
+    }
+    #pass-button {
+        font-size: 32px;
+    } */
+}

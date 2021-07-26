@@ -1,0 +1,33 @@
+#setting {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    color: white;
+    /* background-color: rgba(0, 0, 0, 0.7); */
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 40vh;
+    width: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2em;
+    margin: 2em;
+}
+
+/* Close Button */
+#close-button {
+    position: absolute;
+    top: 4em;
+    right: 0;
+    background-image: url('../asset/image/close.png');
+}

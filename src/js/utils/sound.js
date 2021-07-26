@@ -1,7 +1,7 @@
-import TicktockWav from "../asset/sfx/mixkit-tick-tock-clock-timer-1048.wav";
-import StartgameWav from "../asset/sfx/mixkit-simple-game-countdown-921.wav";
-import CorrectWav from "../asset/sfx/351564__bertrof__game-sound-correct-with-delay.wav";
-import IncorrectWav from "../asset/sfx/351563__bertrof__game-sound-incorrect-with-delay.wav";
+import TicktockWav from "../../asset/sfx/mixkit-tick-tock-clock-timer-1048.wav";
+import StartgameWav from "../../asset/sfx/mixkit-simple-game-countdown-921.wav";
+import CorrectWav from "../../asset/sfx/351564__bertrof__game-sound-correct-with-delay.wav";
+import IncorrectWav from "../../asset/sfx/351563__bertrof__game-sound-incorrect-with-delay.wav";
 
 var ticktock = new sound(TicktockWav);
 var startgame = new sound(StartgameWav);
