@@ -26,6 +26,7 @@
     /* margin: 28px; */
     z-index: 1;
     display: flex;
+    flex-wrap: wrap;
 }
 
 #user-input {
@@ -47,6 +48,12 @@
 
 #pass-button {
     flex: 1;
+    margin: 0.6em;
+}
+
+.choice-button {
+    width: 40%;
+    flex-grow: 1;
     margin: 0.6em;
 }
 
