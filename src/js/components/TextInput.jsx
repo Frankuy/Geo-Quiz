@@ -2,7 +2,6 @@ import React from 'react'
 import styles from '../../css/game.module.css'
 import button from '../../css/button.module.css'
 
-
 // Rules
 const passThreshold = 1;
 

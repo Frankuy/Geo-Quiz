@@ -26,6 +26,7 @@
     /* margin: 28px; */
     z-index: 1;
     display: flex;
+    flex-wrap: wrap;
 }
 
 #user-input {
@@ -48,6 +49,13 @@
 #pass-button {
     flex: 1;
     margin: 0.6em;
+}
+
+.choice-button {
+    width: 40%;
+    flex-grow: 1;
+    margin: 0.6em;
+    font-size: 1.4em;
 }
 
 #clue {
@@ -95,3 +103,11 @@
     color: white;
 }
 
+@media (max-width: 575px) {
+    .choice-button {
+        width: 80%;
+        flex-grow: 1;
+        margin: 0.6em;
+        font-size: 2em;
+    }
+}

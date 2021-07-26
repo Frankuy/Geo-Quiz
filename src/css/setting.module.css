@@ -11,7 +11,7 @@
 .container {
     position: absolute;
     left: 50%;
-    top: 30%;
+    top: 40vh;
     width: 75%;
     transform: translate(-50%, -50%);
 }
@@ -27,7 +27,7 @@
 /* Close Button */
 #close-button {
     position: absolute;
-    top: 8%;
-    right: 0%;
+    top: 4em;
+    right: 0;
     background-image: url('../asset/image/close.png');
 }
