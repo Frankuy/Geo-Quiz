@@ -17,3 +17,4 @@ npm start
 * JavaScript
 * [D3.js](https://d3js.org/)
 * [webpack](https://webpack.js.org/)
+* [React](https://reactjs.org/)
