@@ -58,6 +58,12 @@
     font-size: 1.4em;
 }
 
+.choice-button:disabled {
+    background: #1DA2D8;
+    color: white;
+    border: 0.2em solid #2E8CB2;
+}
+
 #clue {
     position: fixed;
     top: 80px;
