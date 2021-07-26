@@ -139,7 +139,12 @@ const Game = () => {
     }
 
     const pass = () => {
-        changeCountry();
+        setState(prevState => {
+            return { ...prevState, clueName: mapData.features[state.randomNumber].properties.name.toUpperCase() }
+        })
+        setTimeout(() => {
+            changeCountry();
+        }, 1000);
     }
 
     const changeCountry = () => {
