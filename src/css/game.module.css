@@ -58,7 +58,13 @@
     font-size: 1.4em;
 }
 
-.choice-button:disabled {
+.choice-button:hover, .choice-button:active {
+    background: #1DA2D8;
+    color: white;
+    border: 0.2em solid #2E8CB2;
+}
+
+.choice-button:disabled  {
     background: #1DA2D8;
     color: white;
     border: 0.2em solid #2E8CB2;
