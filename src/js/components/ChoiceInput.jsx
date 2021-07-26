@@ -6,10 +6,10 @@ const ChoiceInput = ({ choices, onClick }) => {
     return (
         <div id={styles["input-container"]}>
             {
-                choices.map(choice => {
+                choices.map((choice,index) => {
                     return (
                         <button
-                            key={choice}
+                            key={index}
                             className={button["button-box"] + ' ' + styles["choice-button"]}
                             value={choice}
                             onClick={onClick}
