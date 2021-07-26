@@ -24,7 +24,7 @@
 
 .button-center {
     position: absolute;
-    bottom: 12%;
+    bottom: 0vh;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -42,7 +42,7 @@
 .button-toggle {
     font-size: 1em;
     border-radius: 20px;
-    min-width: 20%;
+    min-width: 100px;
     min-height: 3em;
     cursor: pointer;
     background-color: transparent;

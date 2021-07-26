@@ -16,23 +16,27 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 50em;
-    height: 50em;
+    width: 100%;
+    height: 100%;
+    max-width: 48em;
+    max-height: 48em;
     transform: translate(-50%, -50%);
 }
 
 /* Explore Button */
 #explore-button {
     position: absolute;
-    top: 8%;
-    right: calc(4em + 2%);
+    transform: translate(-50%, -50%);
+    top: 4em;
+    right: 6em;
     background-image: url('../asset/image/explore.png');
 }
 
 /* Setting Button */
 #setting-button {
     position: absolute;
-    top: 8%;
-    right: 0%;
+    transform: translate(-50%, -50%);
+    top: 4em;
+    right: 0;
     background-image: url('../asset/image/setting.png');
 }
