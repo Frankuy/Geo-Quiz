@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../css/game.module.css'
 import button from '../../css/button.module.css'
 import { useParams } from 'react-router-dom'
-import { clue, stringToMs } from '../utils/utils';
+import { clue, getSimilar, stringToMs } from '../utils/text';
 import Score from '../components/Score';
 import TimeRemaining from '../components/TimeRemaining';
 import TextInput from '../components/TextInput';
@@ -160,17 +160,18 @@ const Game = () => {
     }
 
     const choiceGenerator = (random) => {
+        let similarNames = getSimilar(mapData.features[random].properties.name.toUpperCase())
         let choices = [];
         choices.push(mapData.features[random].properties.name.toUpperCase());
-        while (choices.length != 4) {
-            let newRandom = Math.floor(Math.random() * mapData.features.length);
+        while (choices.length !== 4) {
+            let newRandom = Math.floor(Math.random() * similarNames.length);
             let posRandom = Math.random();
-            if (!choices.includes(mapData.features[newRandom].properties.name.toUpperCase())) {
+            if (!choices.includes(similarNames[newRandom])) {
                 if (posRandom < 0.5) {
-                    choices.unshift(mapData.features[newRandom].properties.name.toUpperCase());
+                    choices.unshift(similarNames[newRandom]);
                 }
                 else {
-                    choices.push(mapData.features[newRandom].properties.name.toUpperCase());
+                    choices.push(similarNames[newRandom]);
                 }
             }
         }
