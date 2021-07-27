@@ -1,3 +1,5 @@
+import similarity from '../../asset/similarity.json';
+
 export function clue(name) {
     var names = name.split(' ');
     var clueName = names.map(val => {
@@ -27,4 +29,8 @@ export function stringToMs(string) {
     else if (string == '10m') {
         return 10 * 60 * 1000;
     }
+}
+
+export function getSimilar(name) {
+    return similarity[name];
 }
